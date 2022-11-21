@@ -1,4 +1,4 @@
-# welcome_app
+# Welcome App
 
 A new Flutter project.
 
