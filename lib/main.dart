@@ -33,6 +33,8 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
+  int numberOfImage = 1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,26 +50,45 @@ class _WelcomePageState extends State<WelcomePage> {
               const SizedBox(
                 height: 10.0,
               ),
-              ElevatedButton(
-                style:
-                    ElevatedButton.styleFrom(backgroundColor: Colors.redAccent),
-                onPressed: () {
-                  setState(() {
-                    if (currentPath == imagePath1) {
-                      currentPath = imagePath2;
-                    } else {
-                      currentPath = imagePath1;
-                    }
-                  });
-                },
-                child: const Text('CLICK'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.redAccent),
+                    onPressed: () {
+                      setState(() {
+                        if (currentPath == imagePath1) {
+                          currentPath = imagePath2;
+                        } else {
+                          currentPath = imagePath1;
+                        }
+                      });
+                    },
+                    child: const Text('CLICK'),
+                  ),
+                  const SizedBox(
+                    width: 10.0,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.redAccent,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        numberOfImage++;
+                      });
+                    },
+                    child: const Text('Add an image'),
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 10.0,
               ),
               Column(
                 children: List.generate(
-                  4,
+                  numberOfImage,
                   (index) => Image.asset(currentPath),
                 ),
               ),
