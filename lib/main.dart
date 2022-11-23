@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:welcome_app/pages/login_page.dart';
+import 'package:welcome_app/pages/register_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,10 +23,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-String imagePath1 = 'images/joker.png';
-String imagePath2 = 'images/yeah.png';
-String currentPath = imagePath1;
-
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
 
@@ -33,15 +31,13 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
-  int numberOfImage = 1;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Welcome App in Flutter'),
         centerTitle: true,
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.redAccent,
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -57,15 +53,13 @@ class _WelcomePageState extends State<WelcomePage> {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.redAccent),
                     onPressed: () {
-                      setState(() {
-                        if (currentPath == imagePath1) {
-                          currentPath = imagePath2;
-                        } else {
-                          currentPath = imagePath1;
-                        }
-                      });
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) {
+                          return const LoginPage();
+                        }),
+                      );
                     },
-                    child: const Text('CLICK'),
+                    child: const Text('Login'),
                   ),
                   const SizedBox(
                     width: 10.0,
@@ -75,23 +69,21 @@ class _WelcomePageState extends State<WelcomePage> {
                       backgroundColor: Colors.redAccent,
                     ),
                     onPressed: () {
-                      setState(() {
-                        numberOfImage++;
-                      });
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) {
+                          return const RegisterPage();
+                        }),
+                      );
                     },
-                    child: const Text('Add an image'),
+                    child: const Text('Register'
+                        ''),
                   ),
                 ],
               ),
               const SizedBox(
                 height: 10.0,
               ),
-              Column(
-                children: List.generate(
-                  numberOfImage,
-                  (index) => Image.asset(currentPath),
-                ),
-              ),
+              Image.asset('images/joker.png'),
             ],
           ),
         ),
